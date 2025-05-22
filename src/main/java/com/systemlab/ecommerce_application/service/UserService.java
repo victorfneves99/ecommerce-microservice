@@ -1,9 +1,12 @@
-package com.systemlab.ecommerce_application;
+package com.systemlab.ecommerce_application.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+
+import com.systemlab.ecommerce_application.model.User;
+import com.systemlab.ecommerce_application.repository.UserRepository;
 
 
 @Service

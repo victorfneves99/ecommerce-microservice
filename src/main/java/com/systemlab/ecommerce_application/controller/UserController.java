@@ -1,4 +1,4 @@
-package com.systemlab.ecommerce_application;
+package com.systemlab.ecommerce_application.controller;
 
 import java.util.List;
 
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.systemlab.ecommerce_application.model.User;
+import com.systemlab.ecommerce_application.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
