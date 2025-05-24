@@ -13,7 +13,6 @@ import com.systemlab.ecommerce_application.model.Address;
 import com.systemlab.ecommerce_application.model.User;
 import com.systemlab.ecommerce_application.repository.UserRepository;
 
-import ch.qos.logback.core.util.StringUtil;
 
 @Service
 public class UserService {

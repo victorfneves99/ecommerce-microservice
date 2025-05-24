@@ -3,9 +3,14 @@ package com.systemlab.ecommerce_application.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.systemlab.ecommerce_application.dto.UserResponse;
 import com.systemlab.ecommerce_application.model.CartItem;
+import com.systemlab.ecommerce_application.model.Product;
+import com.systemlab.ecommerce_application.model.User;
 
 @Repository
 public interface CartItemRepository  extends JpaRepository<CartItem, Long> {
+
+    CartItem findByUserAndProduct(User user, Product product);
 
 }
