@@ -1,6 +1,7 @@
 package com.systemlab.ecommerce_application.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -80,6 +81,13 @@ public class CartService {
 
         return false;
 
+    }
+
+    public List<CartItem> findAllItemsByUser(String userId) {
+
+        return userRepository.findById(Long.valueOf(userId))
+                .map(user -> cartItemRepository.findByUser(user))
+                .orElseGet(List::of);
     }
 
 }
