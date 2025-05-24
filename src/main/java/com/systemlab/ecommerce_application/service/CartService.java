@@ -10,10 +10,12 @@ import com.systemlab.ecommerce_application.repository.CartItemRepository;
 import com.systemlab.ecommerce_application.repository.ProductRepository;
 import com.systemlab.ecommerce_application.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CartService {
 
     private final CartItemRepository cartItemRepository;
@@ -59,6 +61,25 @@ public class CartService {
         }
 
         return true;
+    }
+
+    public boolean deleteItemFromCart(String userId, Long productId) {
+
+        var productOptional = productRepository.findById(productId);
+        var userOptional = userRepository.findById(Long.valueOf(userId));
+
+        if (productOptional.isPresent() && userOptional.isPresent()) {
+            var existingCartItem = cartItemRepository.findByUserAndProduct(userOptional.get(), productOptional.get());
+
+            if (existingCartItem == null)
+                return false;
+
+            cartItemRepository.deleteByUserAndProduct(userOptional.get(), productOptional.get());
+            return true;
+        }
+
+        return false;
+
     }
 
 }

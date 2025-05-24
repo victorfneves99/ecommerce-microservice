@@ -53,8 +53,14 @@ public class CartController {
     // return cartService.save(cart);
     // }
 
-    // @DeleteMapping("/{id}")
-    // public void delete(@PathVariable Long id) {
-    // cartService.delete(id);
-    // }
+@DeleteMapping("/items/{productId}")
+public ResponseEntity<String> removeFromCart(@RequestHeader("X-User-Id") String userId, @PathVariable Long productId) {
+    boolean removed = cartService.deleteItemFromCart(userId, productId);
+    if (removed) {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    } else {
+        return ResponseEntity.badRequest().body("Product not found in cart or removal failed");
+    }
+}
+
 }
