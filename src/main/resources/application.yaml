@@ -17,3 +17,22 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create-drop
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  info:
+    env:
+      enabled: true
+
+
+info:
+  app:
+  name: ecommerce-application
+  description: Ecommerce Application
+  version: 0.0.1-SNAPSHOT
