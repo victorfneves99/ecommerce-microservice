@@ -1,11 +1,12 @@
 package com.systemlab.ecommerce_application.dto;
 
+import lombok.Data;
 
-public record UserRequest(
-        String firstName,
-        String lastName,
-        String email,
-        String phone,
-        AddressDTO address) {
-
+@Data
+public class UserRequest {
+        private String firstName;
+        private String lastName;
+        private String email;
+        private String phone;
+        private AddressDTO address;
 }

@@ -50,8 +50,15 @@ public class UserService {
     }
 
     private UserResponse convertUserToUserResponse(User user) {
-        AddressDTO address = new AddressDTO(user.getAddress().getStreet(), user.getAddress().getCity(),
-                user.getAddress().getState(), user.getAddress().getZipCode(), user.getAddress().getCountry());
+        var address = new AddressDTO();
+
+        if (user.getAddress() != null) {
+            address.setStreet(user.getAddress().getStreet());
+            address.setCity(user.getAddress().getCity());
+            address.setState(user.getAddress().getState());
+            address.setCountry(user.getAddress().getCountry());
+            address.setZipCode(user.getAddress().getZipCode());
+        }
 
         return new UserResponse(String.valueOf(user.getId()), user.getFirstName(), user.getLastName(), user.getEmail(),
                 user.getPhone(), user.getRole(), address);
@@ -59,24 +66,24 @@ public class UserService {
 
 
     private User updateUserFromRequest(UserRequest userRequest, @Nullable User existingUser) {
-    var user = existingUser != null ? existingUser : new User();
+        User user = existingUser != null ? existingUser : new User();
 
-    user.setFirstName(userRequest.firstName());
-    user.setLastName(userRequest.lastName());
-    user.setEmail(userRequest.email());
-    user.setPhone(userRequest.phone());
+        user.setFirstName(userRequest.getFirstName());
+        user.setLastName(userRequest.getLastName());
+        user.setEmail(userRequest.getEmail());
+        user.setPhone(userRequest.getPhone());
 
-    if (userRequest.address() != null) {
-        var address = user.getAddress() != null ? user.getAddress() : new Address();
-        address.setStreet(userRequest.address().street());
-        address.setCity(userRequest.address().city());
-        address.setState(userRequest.address().state());
-        address.setZipCode(userRequest.address().zipCode());
-        address.setCountry(userRequest.address().country());
+        Address address = user.getAddress() != null ? user.getAddress() : new Address();
+        if (userRequest.getAddress() != null) {
+            address.setStreet(userRequest.getAddress().getStreet());
+            address.setCity(userRequest.getAddress().getCity());
+            address.setState(userRequest.getAddress().getState());
+            address.setZipCode(userRequest.getAddress().getZipCode());
+            address.setCountry(userRequest.getAddress().getCountry());
+        }
         user.setAddress(address);
-    }
 
-    return user;
-}
+        return user;
+    }
 
 }
